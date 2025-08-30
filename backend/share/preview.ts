@@ -29,6 +29,11 @@ export const preview = api<{ id: string }, HtmlResponse>(
     const thumbnailUrl = video.thumbnail_url || "";
     const redirectUrl = video.redirect_url;
 
+    // Get the current domain from environment or use a default
+    const domain = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : "https://your-domain.com";
+
     // Generate HTML with Open Graph meta tags for Twitter
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -39,7 +44,7 @@ export const preview = api<{ id: string }, HtmlResponse>(
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="video.other">
-    <meta property="og:url" content="https://your-domain.com/share/${id}">
+    <meta property="og:url" content="${domain}/share/${id}">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
     <meta property="og:image" content="${thumbnailUrl}">
@@ -52,11 +57,11 @@ export const preview = api<{ id: string }, HtmlResponse>(
     
     <!-- Twitter -->
     <meta name="twitter:card" content="player">
-    <meta name="twitter:url" content="https://your-domain.com/share/${id}">
+    <meta name="twitter:url" content="${domain}/share/${id}">
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
     <meta name="twitter:image" content="${thumbnailUrl}">
-    <meta name="twitter:player" content="https://your-domain.com/share/${id}/player">
+    <meta name="twitter:player" content="${domain}/share/${id}/player">
     <meta name="twitter:player:width" content="1280">
     <meta name="twitter:player:height" content="720">
     

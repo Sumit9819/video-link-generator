@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import VideoList from "../components/VideoList";
 import CreateVideoDialog from "../components/CreateVideoDialog";
 import type { Video } from "~backend/video/types";
-import backend from "~backend/client";
+import backend from "../lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function HomePage() {

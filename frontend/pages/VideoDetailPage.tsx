@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import EditVideoDialog from "../components/EditVideoDialog";
 import DeleteVideoDialog from "../components/DeleteVideoDialog";
 import type { Video } from "~backend/video/types";
-import backend from "~backend/client";
+import backend from "../lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function VideoDetailPage() {

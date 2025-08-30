@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Video } from "~backend/video/types";
 import { useNavigate } from "react-router-dom";
-import backend from "~backend/client";
+import backend from "../lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
 interface VideoListProps {

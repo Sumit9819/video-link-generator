@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 import type { Video } from "~backend/video/types";
-import backend from "~backend/client";
+import backend from "../lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
 interface DeleteVideoDialogProps {

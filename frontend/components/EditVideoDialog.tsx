@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { Video } from "~backend/video/types";
-import backend from "~backend/client";
+import backend from "../lib/api";
 import { useToast } from "@/components/ui/use-toast";
 
 interface EditVideoDialogProps {
