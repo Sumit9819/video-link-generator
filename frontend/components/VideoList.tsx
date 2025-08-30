@@ -14,7 +14,7 @@ interface VideoListProps {
   onVideoDeleted: (videoId: string) => void;
 }
 
-export default function VideoList({ videos, loading, onVideoDeleted }: VideoListProps) {
+export default function VideoList({ videos = [], loading, onVideoDeleted }: VideoListProps) {
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -73,7 +73,7 @@ export default function VideoList({ videos, loading, onVideoDeleted }: VideoList
     );
   }
 
-  if (videos.length === 0) {
+  if (!videos || videos.length === 0) {
     return (
       <div className="text-center py-12">
         <Play className="w-16 h-16 text-gray-400 mx-auto mb-4" />

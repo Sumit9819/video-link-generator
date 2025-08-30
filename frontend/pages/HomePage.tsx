@@ -16,9 +16,12 @@ export default function HomePage() {
   const loadVideos = async () => {
     try {
       const response = await backend.video.list();
-      setVideos(response.videos);
+      // Ensure we always have an array, even if the response is malformed
+      setVideos(Array.isArray(response?.videos) ? response.videos : []);
     } catch (error) {
       console.error("Failed to load videos:", error);
+      // Set empty array on error to prevent undefined issues
+      setVideos([]);
       toast({
         title: "Error",
         description: "Failed to load videos",
