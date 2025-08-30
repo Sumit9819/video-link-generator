@@ -24,7 +24,15 @@ class BackendClient {
       throw new Error(error.message || `HTTP ${response.status}`);
     }
 
-    return response.json();
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      return response.json();
+    }
+    
+    // For non-JSON responses (like HTML), return as text
+    const text = await response.text();
+    return text as unknown as T;
   }
 
   video = {

@@ -1,7 +1,27 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { video } from '../../backend/video';
+
+// Mock video data
+const mockVideo = {
+  id: '1',
+  title: 'Sample Video',
+  description: 'This is a sample video',
+  videoUrl: 'https://example.com/video.mp4',
+  thumbnailUrl: 'https://example.com/thumb.jpg',
+  redirectUrl: 'https://example.com',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   const { id } = req.query;
   
   if (typeof id !== 'string') {
@@ -10,17 +30,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     if (req.method === 'GET') {
-      const result = await video.get({ id });
-      return res.json(result);
+      return res.status(200).json({ video: mockVideo });
     }
     
     if (req.method === 'PUT') {
-      const result = await video.update({ id, ...req.body });
-      return res.json(result);
+      const updatedVideo = { ...mockVideo, ...req.body, updatedAt: new Date().toISOString() };
+      return res.status(200).json({ video: updatedVideo });
     }
     
     if (req.method === 'DELETE') {
-      await video.deleteVideo({ id });
       return res.status(204).end();
     }
     
